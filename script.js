@@ -12,6 +12,7 @@ const taskCount = document.getElementById("taskCount");
 const emptyState = document.getElementById("emptyState");
 
 const searchInput = document.getElementById("searchInput");
+const clearCompletedBtn = document.getElementById("clearCompletedBtn");
 
 const filterButtons = document.querySelectorAll(".filter-btn");
 
@@ -438,6 +439,50 @@ filterButtons.forEach(button => {
         renderTasks();
 
     });
+
+});
+
+/* =========================
+   CLEAR COMPLETED TASKS
+========================= */
+
+clearCompletedBtn.addEventListener("click", () => {
+
+    const completedCount =
+        tasks.filter(
+            task => task.completed
+        ).length;
+
+
+    if (completedCount === 0) {
+
+        alert("There are no completed tasks to clear.");
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+            `Are you sure you want to remove ${completedCount} completed task${completedCount === 1 ? "" : "s"}?`
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    tasks =
+        tasks.filter(
+            task => !task.completed
+        );
+
+
+    saveTasks();
+
+    renderTasks();
 
 });
 
