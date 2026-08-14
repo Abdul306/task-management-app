@@ -463,6 +463,30 @@ body.dark-mode .summary-icon {
     width: 260px;
 }
 
+.clear-completed-btn {
+    border: 1px solid #fecaca;
+
+    background: #fff;
+
+    color: #dc2626;
+
+    padding: 9px 15px;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+
+    white-space: nowrap;
+}
+
+.clear-completed-btn:hover {
+    background: #fee2e2;
+
+    border-color: #fca5a5;
+}
+
 
 /* =========================
    TASK LIST
@@ -809,6 +833,19 @@ body.dark-mode .footer {
     background: #070d18;
 }
 
+body.dark-mode .clear-completed-btn {
+    background: #111827;
+
+    border-color: #7f1d1d;
+
+    color: #fca5a5;
+}
+
+body.dark-mode .clear-completed-btn:hover {
+    background: #450a0a;
+
+    border-color: #991b1b;
+}
 
 /* =========================
    RESPONSIVE DESIGN
@@ -840,6 +877,10 @@ body.dark-mode .footer {
 
    .productivity-summary {
     grid-template-columns: 1fr 1fr;
+}
+
+   .clear-completed-btn {
+    align-self: flex-start;
 }
 
 }
