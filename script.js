@@ -220,7 +220,7 @@ function createTaskElement(task) {
             </div>
 
 
-          <div class="task-meta">
+     <div class="task-meta">
 
     <span class="priority priority-${task.priority}">
         ${capitalize(task.priority)} Priority
@@ -233,6 +233,12 @@ function createTaskElement(task) {
     ${
         task.dueDate
         ? `<span>📅 Due ${formatDueDate(task.dueDate)}</span>`
+        : ""
+    }
+
+    ${
+        isOverdue(task)
+        ? `<span class="overdue-badge">⚠️ Overdue</span>`
         : ""
     }
 
@@ -545,3 +551,30 @@ function formatDueDate(date) {
 ========================= */
 
 renderTasks();
+
+/* =========================
+   OVERDUE CHECK
+========================= */
+
+function isOverdue(task) {
+
+    if (!task.dueDate || task.completed) {
+        return false;
+    }
+
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0);
+
+    const parts = task.dueDate.split("-");
+
+    const dueDate = new Date(
+        parts[0],
+        parts[1] - 1,
+        parts[2]
+    );
+
+    dueDate.setHours(0, 0, 0, 0);
+
+    return dueDate < today;
+}
