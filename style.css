@@ -496,8 +496,25 @@ button {
 
 .priority-low {
     background: #dcfce7;
-
     color: #15803d;
+}
+
+.overdue-badge {
+    background: #fee2e2;
+    color: #dc2626;
+
+    padding: 4px 9px;
+
+    border-radius: 20px;
+
+    font-size: 0.7rem;
+
+    font-weight: 700;
+}
+
+body.dark-mode .overdue-badge {
+    background: #450a0a;
+    color: #fca5a5;
 }
 
 
