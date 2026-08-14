@@ -358,17 +358,60 @@ function createTaskElement(task) {
 
 function updateTaskCount() {
 
-    const activeTasks =
+    const total =
+        tasks.length;
+
+    const completed =
         tasks.filter(
-            task => !task.completed
+            task => task.completed
         ).length;
+
+    const active =
+        total - completed;
+
+    const completionRate =
+        total === 0
+            ? 0
+            : Math.round(
+                (completed / total) * 100
+            );
 
 
     taskCount.textContent =
-        activeTasks;
+        active;
+
+
+    const totalTasks =
+        document.getElementById("totalTasks");
+
+    const completedTasks =
+        document.getElementById("completedTasks");
+
+    const activeTasks =
+        document.getElementById("activeTasks");
+
+    const completionRateElement =
+        document.getElementById("completionRate");
+
+
+    if (totalTasks) {
+        totalTasks.textContent = total;
+    }
+
+    if (completedTasks) {
+        completedTasks.textContent = completed;
+    }
+
+    if (activeTasks) {
+        activeTasks.textContent = active;
+    }
+
+    if (completionRateElement) {
+        completionRateElement.textContent =
+            completionRate + "%";
+    }
 
 }
-
 
 /* =========================
    FILTER TASKS
