@@ -5,6 +5,7 @@
 const taskForm = document.getElementById("taskForm");
 const taskInput = document.getElementById("taskInput");
 const priorityInput = document.getElementById("priorityInput");
+const dueDateInput = document.getElementById("dueDateInput");
 
 const taskList = document.getElementById("taskList");
 const taskCount = document.getElementById("taskCount");
@@ -72,28 +73,28 @@ taskForm.addEventListener("submit", function (event) {
     }
 
 
-    const newTask = {
+ const newTask = {
 
-        id: Date.now(),
+    id: Date.now(),
 
-        title: title,
+    title: title,
 
-        priority: priority,
+    priority: priority,
 
-        completed: false,
+    dueDate: dueDateInput.value,
 
-        createdAt: new Date().toLocaleDateString(
-            "en-NG",
-            {
-                day: "numeric",
-                month: "short",
-                year: "numeric"
-            }
-        )
+    completed: false,
 
-    };
+    createdAt: new Date().toLocaleDateString(
+        "en-NG",
+        {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+        }
+    )
 
-
+};
     tasks.unshift(newTask);
 
 
@@ -105,6 +106,7 @@ taskForm.addEventListener("submit", function (event) {
     taskInput.value = "";
 
     priorityInput.value = "medium";
+    dueDateInput.value = "";
 
     taskInput.focus();
 
@@ -218,18 +220,23 @@ function createTaskElement(task) {
             </div>
 
 
-            <div class="task-meta">
+          <div class="task-meta">
 
-                <span class="priority priority-${task.priority}">
-                    ${capitalize(task.priority)} Priority
-                </span>
+    <span class="priority priority-${task.priority}">
+        ${capitalize(task.priority)} Priority
+    </span>
 
-                <span>
-                    Added ${task.createdAt}
-                </span>
+    <span>
+        Added ${task.createdAt}
+    </span>
 
-            </div>
+    ${
+        task.dueDate
+        ? `<span>📅 Due ${formatDueDate(task.dueDate)}</span>`
+        : ""
+    }
 
+</div>
         </div>
 
 
@@ -504,6 +511,31 @@ function capitalize(text) {
 
     return text.charAt(0).toUpperCase()
         + text.slice(1);
+
+}
+
+/* =========================
+   FORMAT DUE DATE
+========================= */
+
+function formatDueDate(date) {
+
+    const parts = date.split("-");
+
+    const formattedDate = new Date(
+        parts[0],
+        parts[1] - 1,
+        parts[2]
+    );
+
+    return formattedDate.toLocaleDateString(
+        "en-NG",
+        {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+        }
+    );
 
 }
 
